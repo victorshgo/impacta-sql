@@ -1,0 +1,100 @@
+1) Comando CREATE DATABASE
+Comando que cria um novo banco de dados vazio. No exemplo abaixo, vamos criar um banco de dados chamado “exemplos_becode”.
+
+CREATE DATABASE exemplos_becode;
+
+2) Comando SHOW DATABASES
+Utilizado caso você possua múltiplas bases de dados e deseja visualizar uma lista com os itens de cada base. Para isso, usa-se o seguinte comando:
+
+SHOW DATABASES;
+
+3) Comando USE
+Uso similar ao comando de cima. Com o comando USE, é possível selecionar o banco de dados que queremos utilizar/manipular. Para isso, escrevemos a seguinte instrução:
+
+USE exemplos_becode;
+
+A partir de agora, todos os comandos executados surtirão efeito no banco de dados escolhido, no caso, o banco de dados que acabamos de criar, o “exemplos_becode”.
+
+Você pode estar se perguntando…
+
+“porque usar o comando SHOW DATABASES E USE?”
+
+É simples, imagine um cenário onde você trabalha com diversos bancos de dados e necessita trocar de um para outro, ou melhor, saber o que há em uma base de dados e o que está contido na outra. Esta é a utilidade destes comandos.
+
+4) Comando CREATE TABLE
+Os bancos relacionais guardam todos os seus dados dentro de tabelas. Contudo, como criamos uma tabela? Para isso, utilizamos o comando CREATE TABLE.
+
+CREATE TABLE produtos (nome VARCHAR (255), codigo INT (11));
+
+As tabelas são divididas em colunas. No exemplo acima, a tabela produtos foi setada com uma coluna para salvar o nome do produto e outra coluna para salvar o código de cada produto. Sempre que criamos uma tabela, precisamos especificar quais colunas e quais tipos de dados que cada coluna irá receber, como fizemos acima.
+
+Os tipos de dados são diversos e podem ser acessados nesse link. A tabela será criada dentro do banco selecionado previamente. No caso, o banco exemplos_becode.
+
+5) Comando SHOW TABLES
+Similar ao comando SHOW DATABASES, utilizado caso você possua múltiplas tabelas dentro de um banco de dados e desejar ver uma lista de todos os itens contidos em cada tabela. Para isso, utilize o comando:
+
+SHOW TABLES;
+
+6) Comando ALTER TABLE
+O comando ALTER TABLE é utilizado para modificar uma tabela já criada. Com ele, é possível alterar a estrutura de suas colunas, bem como, adicionar, editar e remover. No exemplo a seguir, vamos adicionar uma coluna de descrição para nossos produtos, logo após a coluna de código:
+
+ALTER TABLE produtos ADD descricao VARCHAR (255) AFTER codigo;
+
+7) Comando INSERT
+Agora que já montamos e alteramos  a estrutura de uma tabela, vamos inserir dados através de comandos SQL. Entretanto, isso também pode ser feito de forma dinâmica, dentro de uma aplicação, através da utilização de alguma linguagem de programação back-end. Com uma linguagem de programação, é possível enviar comandos SQL para o banco de dados.
+
+De qualquer forma, voltamos para o nosso exemplo:
+
+Para adicionar um produto à nossa tabela, podemos inseri-lo da seguinte forma:
+
+INSERT INTO produtos VALUES (“Exemplo”, 1, “Produto exemplo”);
+
+Para inserir apenas campos específicos, é necessário explicitar as colunas que vão receber os valores. Por exemplo:
+
+INSERT INTO produtos (nome, codigo) VALUES (“Exemplo 2”, 2);
+
+A primeira forma funcionará somente se preenchermos todas as colunas na ordem correta. Ou seja, se a tabela conter 20 campos, vamos ter que definir os 20 dados na ordem correta, na hora de escrever o comando de inserção.
+
+8) Comando UPDATE
+O comando UPDATE é responsável por atualizar dados já criados em nossa tabela. Contudo, para encontrar o registro que queremos alterar, devemos usar uma condição.
+
+Um exemplo básico de condição é buscar por um valor já conhecido. Por exemplo, o código do produto. Abaixo, vamos alterar a descrição do produto que possui o código 2:
+
+UPDATE produtos SET descricao = “Produto exemplo 2” WHERE codigo = 2;
+
+Para atualizar a tabela produtos e alterar o campo descrição, vamos utilizar o comando SET acompanhado de uma condição WHERE. Essa combinação também é útil quando desejamos alterar múltiplos registros apenas com um comando. Por exemplo, o comando abaixo altera a descrição para todos os itens que possuírem um código maior que 1.
+
+UPDATE produtos SET descricao = “Produto exemplo” WHERE codigo > 1;
+
+9) Comando DELETE
+Para excluir um registro de nossa tabela, utilizamos o comando DELETE junto de uma condição, seguindo a mesma lógica usada no comando UPDATE.
+
+Primeiro, vamos inserir um novo registro de código 3:
+
+INSERT INTO produtos VALUES (“Exemplo 3”, 3, “Produto exemplo”);
+
+No código abaixo, vamos excluir o produto que acabamos de criar através da condição definida no código SQL.
+
+DELETE FROM produtos WHERE codigo = 3;
+
+Assim como o comando UPDATE, é possível remover diversos registros de uma só vez, utilizando condições que retornem múltiplos registros.
+
+10) Comando SELECT
+Trata-se de um dos comandos SQL mais importantes! Ele retorna registros do banco de dados baseado em condições. As condições seguem o mesmo formato dos comandos anteriores.
+
+Para retornar o produto de código 1, vamos utilizar o comando:
+
+SELECT * FROM produtos WHERE codigo = 1;
+
+O asterisco (*) informa que desejamos retornar todas as colunas do item. Se quisermos, por exemplo, retornar apenas o nome do produto, utilizaremos o comando:
+
+SELECT nome FROM produtos WHERE codigo = 1;
+
+Podemos buscar múltiplos registros:
+
+SELECT nome FROM produtos WHERE codigo >= 1;
+
+Ou até todos os registros da tabela, retirando a condicional:
+
+SELECT nome FROM produtos;
+
